@@ -122,3 +122,9 @@
   }
 }
 ```
+
+## Webhook Header
+
+```text
+X-CampusFlow-Webhook-Secret: <N8N_WEBHOOK_SECRET>
+```

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { isoDateTimeSchema } from "./common";
+import { isoDateTimeSchema, subjectSchema } from "./common";
 
 export const taskPriorityValues = ["low", "medium", "high"] as const;
 
@@ -7,6 +7,7 @@ export const taskSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(2).max(160),
   description: z.string().max(500).optional().default(""),
+  subject: subjectSchema.optional().default(""),
   dueAt: isoDateTimeSchema,
   reminderAt: isoDateTimeSchema,
   addToCalendar: z.boolean().default(false),

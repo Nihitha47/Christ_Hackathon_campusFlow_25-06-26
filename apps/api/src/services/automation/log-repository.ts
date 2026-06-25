@@ -9,9 +9,15 @@ export async function insertAutomationLog(input: AutomationEventInput<Record<str
       event_type: input.eventType,
       module_key: input.moduleKey,
       entity_id: input.entityId,
-      payload: input.payload,
       status: delivery.status,
-      error_message: delivery.errorMessage ?? null
+      error_message: delivery.errorMessage ?? null,
+      payload: {
+        ...input.payload,
+        deliveryMeta: {
+          responseStatus: delivery.responseStatus ?? null,
+          attempts: delivery.attempts ?? null
+        }
+      }
     })
     .select("*")
     .single();
