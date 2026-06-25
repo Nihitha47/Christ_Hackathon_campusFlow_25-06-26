@@ -1,6 +1,10 @@
 import type { AutomationEventType, ModuleKey } from "./enums";
 
+<<<<<<< HEAD
 export const apiBasePath = "";
+=======
+export const apiBasePath = "/api";
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 
 export const routePaths = {
   login: "/login",

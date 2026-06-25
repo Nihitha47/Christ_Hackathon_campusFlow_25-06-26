@@ -21,6 +21,7 @@ export const errorHandler: ErrorRequestHandler = (error, _request, response, _ne
     return;
   }
 
+<<<<<<< HEAD
   const isDev = process.env.NODE_ENV !== "production";
   let details: unknown = undefined;
   if (isDev) {
@@ -31,4 +32,7 @@ export const errorHandler: ErrorRequestHandler = (error, _request, response, _ne
     }
   }
   response.status(500).json({ error: "Internal server error", details });
+=======
+  response.status(500).json({ error: "Internal server error" });
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 };

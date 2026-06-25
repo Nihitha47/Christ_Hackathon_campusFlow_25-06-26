@@ -18,6 +18,7 @@ export async function postAutomationWebhook(payload: Record<string, unknown>): P
   const timeoutMs = env.N8N_TIMEOUT_MS;
   let lastError = "";
 
+<<<<<<< HEAD
   // Build GET URL: flatten top-level fields + pass full payload as JSON in "data" param
   function buildGetUrl(base: string, data: Record<string, unknown>): string {
     const params = new URLSearchParams();
@@ -41,17 +42,29 @@ export async function postAutomationWebhook(payload: Record<string, unknown>): P
     return `${base}?${params.toString()}`;
   }
 
+=======
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
   for (let attempt = 1; attempt <= maxRetries; attempt += 1) {
     const controller = new AbortController();
     const timeout = globalThis.setTimeout(() => controller.abort(), timeoutMs);
 
     try {
+<<<<<<< HEAD
       const url = buildGetUrl(webhookUrl, payload);
       const response = await fetch(url, {
         method: "GET",
         headers: {
           ...(env.N8N_WEBHOOK_SECRET ? { "X-CampusFlow-Webhook-Secret": env.N8N_WEBHOOK_SECRET } : {})
         },
+=======
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(env.N8N_WEBHOOK_SECRET ? { "X-CampusFlow-Webhook-Secret": env.N8N_WEBHOOK_SECRET } : {})
+        },
+        body: JSON.stringify(payload),
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
         signal: controller.signal
       });
 
@@ -62,7 +75,11 @@ export async function postAutomationWebhook(payload: Record<string, unknown>): P
         return { status: "sent", responseStatus: response.status, responseBody, attempts: attempt };
       }
 
+<<<<<<< HEAD
       lastError = `Webhook responded with ${response.status}: ${responseBody.substring(0, 200)}`;
+=======
+      lastError = `Webhook responded with ${response.status}`;
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
       log("warn", "automation webhook returned a non-2xx response", { attempt, responseStatus: response.status, responseBody });
     } catch (error) {
       globalThis.clearTimeout(timeout);

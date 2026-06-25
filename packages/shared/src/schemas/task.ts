@@ -9,7 +9,11 @@ export const taskSchema = z.object({
   description: z.string().max(500).optional().default(""),
   subject: subjectSchema.optional().default(""),
   dueAt: isoDateTimeSchema,
+<<<<<<< HEAD
   reminderAt: z.union([isoDateTimeSchema, z.literal(""), z.null()]).optional(),
+=======
+  reminderAt: isoDateTimeSchema,
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
   addToCalendar: z.boolean().default(false),
   priority: z.enum(taskPriorityValues),
   completed: z.boolean().default(false),
@@ -19,6 +23,10 @@ export const taskSchema = z.object({
 
 export type TaskRecord = z.infer<typeof taskSchema>;
 
+<<<<<<< HEAD
 export const taskUpsertSchema = taskSchema.omit({ id: true, createdAt: true, updatedAt: true, completed: true });
+=======
+export const taskUpsertSchema = taskSchema.omit({ id: true, createdAt: true, updatedAt: true });
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 
 export type TaskUpsertInput = z.infer<typeof taskUpsertSchema>;

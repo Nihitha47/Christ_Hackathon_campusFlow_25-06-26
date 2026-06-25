@@ -15,6 +15,7 @@ interface DeadlineFormProps {
   isLoading?: boolean;
 }
 
+<<<<<<< HEAD
 // datetime-local gives "2026-06-25T14:05" — convert to full ISO with offset
 function toISO(localDatetime: string): string {
   if (!localDatetime) return "";
@@ -25,6 +26,8 @@ function toISO(localDatetime: string): string {
   return d.toISOString(); // always returns UTC ISO string with Z
 }
 
+=======
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 export default function DeadlineForm({
   deadline,
   subjects,
@@ -45,8 +48,13 @@ export default function DeadlineForm({
           description: deadline.description,
           subject: deadline.subject,
           priority: deadline.priority,
+<<<<<<< HEAD
           dueAt: deadline.dueAt ? deadline.dueAt.slice(0, 16) : "",
           reminderAt: deadline.reminderAt ? deadline.reminderAt.slice(0, 16) : "",
+=======
+          dueAt: deadline.dueAt.slice(0, 16), // Convert ISO to datetime-local format
+          reminderAt: deadline.reminderAt.slice(0, 16),
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
           addToCalendar: deadline.addToCalendar
         }
       : {
@@ -62,6 +70,7 @@ export default function DeadlineForm({
 
   const addToCalendar = watch("addToCalendar");
 
+<<<<<<< HEAD
   // Convert datetime-local strings to ISO before submitting
   const onFormSubmit = (data: TaskUpsertInput) => {
     onSubmit({
@@ -74,6 +83,11 @@ export default function DeadlineForm({
   return (
     <Card className="border-white/8 bg-slate-950/80 overflow-hidden">
       <form onSubmit={handleSubmit(onFormSubmit)} className="p-6 space-y-4">
+=======
+  return (
+    <Card className="border-white/8 bg-slate-950/80 overflow-hidden">
+      <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-4">
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-white">
@@ -122,6 +136,7 @@ export default function DeadlineForm({
           <Label htmlFor="subject" className="text-xs font-semibold">
             Subject
           </Label>
+<<<<<<< HEAD
           <input
             id="subject"
             list="subject-options"
@@ -134,6 +149,20 @@ export default function DeadlineForm({
               <option key={subject} value={subject} />
             ))}
           </datalist>
+=======
+          <select
+            id="subject"
+            {...register("subject")}
+            className="w-full px-3 py-2 bg-slate-800/50 border border-white/10 rounded-md text-slate-100 text-sm placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+          >
+            <option value="">-- Select or type --</option>
+            {subjects.map((subject) => (
+              <option key={subject} value={subject}>
+                {subject}
+              </option>
+            ))}
+          </select>
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
           {errors.subject && <p className="text-xs text-red-400">{errors.subject.message}</p>}
         </div>
 

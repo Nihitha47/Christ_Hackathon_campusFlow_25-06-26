@@ -39,11 +39,19 @@ export type ListSessionsResponse = {
 };
 
 export async function listGroups(ownerProfileId: string): Promise<ListGroupsResponse> {
+<<<<<<< HEAD
   return apiJson<ListGroupsResponse>(`/api/study-groups?ownerProfileId=${encodeURIComponent(ownerProfileId)}`);
 }
 
 export async function createGroup(payload: CreateGroupInput): Promise<GroupWithMembers> {
   const response = await apiJson<{ group: GroupWithMembers }>("/api/study-groups", {
+=======
+  return apiJson<ListGroupsResponse>(`/study-groups?ownerProfileId=${encodeURIComponent(ownerProfileId)}`);
+}
+
+export async function createGroup(payload: CreateGroupInput): Promise<GroupWithMembers> {
+  const response = await apiJson<{ group: GroupWithMembers }>("/study-groups", {
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
     method: "POST",
     body: JSON.stringify(payload)
   });
@@ -51,7 +59,11 @@ export async function createGroup(payload: CreateGroupInput): Promise<GroupWithM
 }
 
 export async function addGroupMember(groupId: string, payload: AddMemberInput): Promise<StudyGroupMemberRecord> {
+<<<<<<< HEAD
   const response = await apiJson<{ member: StudyGroupMemberRecord }>(`/api/study-groups/${groupId}/members`, {
+=======
+  const response = await apiJson<{ member: StudyGroupMemberRecord }>(`/study-groups/${groupId}/members`, {
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
     method: "POST",
     body: JSON.stringify(payload)
   });
@@ -60,11 +72,19 @@ export async function addGroupMember(groupId: string, payload: AddMemberInput): 
 
 export async function listSessions(groupId?: string): Promise<ListSessionsResponse> {
   const suffix = groupId ? `?groupId=${encodeURIComponent(groupId)}` : "";
+<<<<<<< HEAD
   return apiJson<ListSessionsResponse>(`/api/study-sessions${suffix}`);
 }
 
 export async function createSession(payload: CreateSessionInput): Promise<StudySessionRecord> {
   const response = await apiJson<{ session: StudySessionRecord }>("/api/study-sessions", {
+=======
+  return apiJson<ListSessionsResponse>(`/study-sessions${suffix}`);
+}
+
+export async function createSession(payload: CreateSessionInput): Promise<StudySessionRecord> {
+  const response = await apiJson<{ session: StudySessionRecord }>("/study-sessions", {
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
     method: "POST",
     body: JSON.stringify(payload)
   });

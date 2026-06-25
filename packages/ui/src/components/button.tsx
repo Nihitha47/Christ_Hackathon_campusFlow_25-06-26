@@ -25,8 +25,12 @@ export function Button({ className, variant = "primary", asChild = false, childr
     <button
       className={classes}
       {...props}
+<<<<<<< HEAD
     >
       {children}
     </button>
+=======
+    />
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
   );
 }

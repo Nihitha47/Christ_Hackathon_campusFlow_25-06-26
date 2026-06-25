@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const idSchema = z.string().min(1);
 
+<<<<<<< HEAD
 // Accepts full ISO strings (from API) AND datetime-local browser input (YYYY-MM-DDTHH:MM)
 export const isoDateTimeSchema = z
   .string()
@@ -14,6 +15,9 @@ export const isoDateTimeSchema = z
     if (isNaN(d.getTime())) throw new Error("Invalid datetime");
     return d.toISOString();
   });
+=======
+export const isoDateTimeSchema = z.string().datetime({ offset: true });
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 
 export const phoneSchema = z
   .string()
@@ -23,4 +27,8 @@ export const phoneSchema = z
 
 export const branchSchema = z.string().min(2).max(120);
 
+<<<<<<< HEAD
 export const subjectSchema = z.string().min(1).max(120);
+=======
+export const subjectSchema = z.string().min(2).max(120);
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a

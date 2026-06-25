@@ -8,7 +8,11 @@ import { onboardingSchema, registerRequestSchema, type OnboardingInput, type Reg
 import { Button, Card, Input, Label, Textarea } from "@campusflow/ui";
 import { splitSubjects } from "../../../lib/utils";
 
+<<<<<<< HEAD
 const registerFormSchema = onboardingSchema.omit({ subjects: true }).extend({
+=======
+const registerFormSchema = onboardingSchema.extend({
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
   password: z.string().min(8).max(128),
   subjectsText: z.string().min(2)
 });
@@ -40,6 +44,7 @@ export default function RegisterPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
+<<<<<<< HEAD
 
       if (!response.ok) {
         const errText = await response.text();
@@ -58,6 +63,11 @@ export default function RegisterPage() {
       setTimeout(() => { window.location.href = "/dashboard"; }, 1200);
     } catch (err: unknown) {
       console.error("Registration error:", err);
+=======
+      if (!response.ok) throw new Error(await response.text());
+      setStatus("success");
+    } catch {
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
       setStatus("error");
     }
   };

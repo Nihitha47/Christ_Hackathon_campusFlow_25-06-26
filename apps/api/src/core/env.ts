@@ -1,11 +1,16 @@
 import { config as loadDotenv } from "dotenv";
 import { z } from "zod";
+<<<<<<< HEAD
 import { resolve } from "path";
 import { fileURLToPath } from "url";
 
 // Load .env from the monorepo root (apps/api/src/core/env.ts → 5 up = workspace root)
 const __filename = fileURLToPath(import.meta.url);
 loadDotenv({ path: resolve(__filename, "../../../../../.env") });
+=======
+
+loadDotenv();
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),

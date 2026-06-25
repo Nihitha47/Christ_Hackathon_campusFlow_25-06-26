@@ -17,6 +17,7 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values)
       });
+<<<<<<< HEAD
       if (!response.ok) {
         setMessage(await response.text());
         return;
@@ -28,6 +29,9 @@ export default function LoginPage() {
       }
       setMessage("Login successful! Redirecting...");
       setTimeout(() => { window.location.href = "/dashboard"; }, 800);
+=======
+      setMessage(response.ok ? "Login successful" : await response.text());
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
     } catch {
       setMessage("Login failed");
     }

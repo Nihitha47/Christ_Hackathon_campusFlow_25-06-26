@@ -1,6 +1,10 @@
 import { getSupabaseAdmin } from "../../core/supabase";
 import { AppError } from "../../core/errors";
+<<<<<<< HEAD
 import { automationService } from "../../services/automation";
+=======
+import { automationService } from "../services/automation";
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 import type { TaskRecord, TaskUpsertInput } from "@campusflow/shared";
 
 export class DeadlineService {
@@ -15,7 +19,11 @@ export class DeadlineService {
         description: input.description || "",
         subject: input.subject || "",
         due_at: input.dueAt,
+<<<<<<< HEAD
         reminder_at: input.reminderAt || null,
+=======
+        reminder_at: input.reminderAt,
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
         add_to_calendar: input.addToCalendar,
         priority: input.priority,
         completed: false
@@ -84,7 +92,11 @@ export class DeadlineService {
         description: input.description || "",
         subject: input.subject || "",
         due_at: input.dueAt,
+<<<<<<< HEAD
         reminder_at: input.reminderAt || null,
+=======
+        reminder_at: input.reminderAt,
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
         add_to_calendar: input.addToCalendar,
         priority: input.priority,
         updated_at: new Date().toISOString()

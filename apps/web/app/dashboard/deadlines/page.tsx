@@ -4,12 +4,21 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Badge, Button, Card, CardDescription, CardTitle } from "@campusflow/ui";
 import { ChevronDown, Plus } from "lucide-react";
+<<<<<<< HEAD
 import { apiJson } from "../../../lib/api-client";
 import type { TaskRecord } from "@campusflow/shared";
 import DeadlineStats from "../../../components/modules/deadlines/deadline-stats";
 import DeadlineList from "../../../components/modules/deadlines/deadline-list";
 import DeadlineForm from "../../../components/modules/deadlines/deadline-form";
 import DeadlineFilters from "../../../components/modules/deadlines/deadline-filters";
+=======
+import { apiJson } from "../lib/api-client";
+import type { TaskRecord } from "@campusflow/shared";
+import DeadlineStats from "../components/modules/deadlines/deadline-stats";
+import DeadlineList from "../components/modules/deadlines/deadline-list";
+import DeadlineForm from "../components/modules/deadlines/deadline-form";
+import DeadlineFilters from "../components/modules/deadlines/deadline-filters";
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 
 export default function DeadlinesPage() {
   const queryClient = useQueryClient();
@@ -20,7 +29,11 @@ export default function DeadlinesPage() {
 
   const { data: stats = { totalTasks: 0, completed: 0, dueToday: 0, overdue: 0 }, isLoading: statsLoading } = useQuery({
     queryKey: ["deadline-stats"],
+<<<<<<< HEAD
     queryFn: () => apiJson<{ totalTasks: number; completed: number; dueToday: number; overdue: number }>("/api/deadlines/stats")
+=======
+    queryFn: () => apiJson<{ totalTasks: number; completed: number; dueToday: number; overdue: number }>("/deadlines/stats")
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
   });
 
   const { data: tasksData = { tasks: [] }, isLoading: tasksLoading } = useQuery({
@@ -30,12 +43,20 @@ export default function DeadlinesPage() {
       if (subjectFilter) params.append("subject", subjectFilter);
       if (statusFilter === "pending") params.append("completed", "false");
       if (statusFilter === "completed") params.append("completed", "true");
+<<<<<<< HEAD
       return apiJson<{ tasks: TaskRecord[] }>(`/api/deadlines?${params.toString()}`);
+=======
+      return apiJson<{ tasks: TaskRecord[] }>(`/deadlines?${params.toString()}`);
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
     }
   });
 
   const createMutation = useMutation({
+<<<<<<< HEAD
     mutationFn: (data: any) => apiJson("/api/deadlines", { method: "POST", body: JSON.stringify(data) }),
+=======
+    mutationFn: (data: any) => apiJson("/deadlines", { method: "POST", body: JSON.stringify(data) }),
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["deadlines"] });
       queryClient.invalidateQueries({ queryKey: ["deadline-stats"] });
@@ -45,7 +66,11 @@ export default function DeadlinesPage() {
 
   const updateMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: any }) =>
+<<<<<<< HEAD
       apiJson(`/api/deadlines/${id}`, { method: "PATCH", body: JSON.stringify(data) }),
+=======
+      apiJson(`/deadlines/${id}`, { method: "PATCH", body: JSON.stringify(data) }),
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["deadlines"] });
       queryClient.invalidateQueries({ queryKey: ["deadline-stats"] });
@@ -55,7 +80,11 @@ export default function DeadlinesPage() {
   });
 
   const deleteMutation = useMutation({
+<<<<<<< HEAD
     mutationFn: (id: string) => apiJson(`/api/deadlines/${id}`, { method: "DELETE" }),
+=======
+    mutationFn: (id: string) => apiJson(`/deadlines/${id}`, { method: "DELETE" }),
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["deadlines"] });
       queryClient.invalidateQueries({ queryKey: ["deadline-stats"] });
@@ -63,7 +92,11 @@ export default function DeadlinesPage() {
   });
 
   const completeMutation = useMutation({
+<<<<<<< HEAD
     mutationFn: (id: string) => apiJson(`/api/deadlines/${id}/complete`, { method: "POST" }),
+=======
+    mutationFn: (id: string) => apiJson(`/deadlines/${id}/complete`, { method: "POST" }),
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["deadlines"] });
       queryClient.invalidateQueries({ queryKey: ["deadline-stats"] });

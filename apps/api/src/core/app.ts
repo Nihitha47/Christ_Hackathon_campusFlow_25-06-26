@@ -5,11 +5,22 @@ import { apiRouteContracts, registerRequestSchema, loginRequestSchema } from "@c
 import { errorHandler, notFoundHandler, AppError } from "./errors";
 import { getEnv } from "./env";
 import { created, ok } from "./response";
+<<<<<<< HEAD
 import { getSupabaseAdmin, getSupabaseClient, getSupabaseSessionClient } from "./supabase";
 import { automationService } from "../services/automation";
 import { deadlineRouter } from "../modules/deadlines";
 import { authMiddleware } from "./auth-middleware";
 import { groupsRouter } from "../modules/groups";
+=======
+import { getSupabaseAdmin } from "./supabase";
+import { automationService } from "../services/automation";
+<<<<<<< HEAD
+import { deadlineRouter } from "../modules/deadlines";
+import { authMiddleware } from "./auth-middleware";
+=======
+import { groupsRouter } from "../modules/groups";
+>>>>>>> b6c893c318a7dd8822838ebfbd1acf60da7ed5c3
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 
 export function createApp() {
   const app = express();
@@ -27,6 +38,7 @@ export function createApp() {
   app.post(apiRouteContracts.register.path, async (request, response, next) => {
     try {
       const body = registerRequestSchema.parse(request.body);
+<<<<<<< HEAD
       const supabaseAdmin = getSupabaseAdmin();
 
       // Use admin.createUser to bypass email confirmation — user is immediately active
@@ -70,17 +82,50 @@ export function createApp() {
         .upsert(
           {
             id: profileId,
+=======
+      const supabase = getSupabaseAdmin();
+
+      const authResult = await supabase.auth.signUp({
+        email: body.googleEmail,
+        password: body.password,
+        options: {
+          data: {
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
             name: body.name,
             branch: body.branch,
             year: body.year,
             subjects: body.subjects,
             phone_number: body.phoneNumber,
             google_email: body.googleEmail
+<<<<<<< HEAD
           },
           { onConflict: "id" }
         )
         .select("*")
         .single();
+=======
+          }
+        }
+      });
+
+      if (authResult.error || !authResult.data.user) {
+        throw new AppError(400, authResult.error?.message ?? "Unable to register user");
+      }
+
+      const profileId = authResult.data.user.id;
+      const { data: profile, error } = await supabase.from("profiles").upsert(
+        {
+          id: profileId,
+          name: body.name,
+          branch: body.branch,
+          year: body.year,
+          subjects: body.subjects,
+          phone_number: body.phoneNumber,
+          google_email: body.googleEmail
+        },
+        { onConflict: "id" }
+      ).select("*").single();
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 
       if (error || !profile) {
         throw new AppError(400, error?.message ?? "Failed to create profile");
@@ -89,8 +134,13 @@ export function createApp() {
       return created(response, {
         profile,
         session: {
+<<<<<<< HEAD
           accessToken,
           refreshToken: signInResult.data.session.refresh_token,
+=======
+          accessToken: authResult.data.session?.access_token ?? "",
+          refreshToken: authResult.data.session?.refresh_token,
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
           profileId
         }
       });
@@ -102,19 +152,27 @@ export function createApp() {
   app.post(apiRouteContracts.login.path, async (request, response, next) => {
     try {
       const body = loginRequestSchema.parse(request.body);
+<<<<<<< HEAD
       const supabase = getSupabaseClient();
+=======
+      const supabase = getSupabaseAdmin();
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
       const authResult = await supabase.auth.signInWithPassword({ email: body.googleEmail, password: body.password });
 
       if (authResult.error || !authResult.data.user) {
         throw new AppError(401, authResult.error?.message ?? "Invalid login credentials");
       }
 
+<<<<<<< HEAD
       if (!authResult.data.session?.access_token) {
         throw new AppError(401, "Login succeeded but no session was returned");
       }
 
       const profileClient = getSupabaseSessionClient(authResult.data.session.access_token);
       const { data: profile, error } = await profileClient.from("profiles").select("*").eq("id", authResult.data.user.id).single();
+=======
+      const { data: profile, error } = await supabase.from("profiles").select("*").eq("id", authResult.data.user.id).single();
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 
       if (error || !profile) {
         throw new AppError(404, error?.message ?? "Profile not found");

@@ -3,6 +3,7 @@ import { getEnv, requireEnv } from "./env";
 
 let client: SupabaseClient | null = null;
 
+<<<<<<< HEAD
 function createSupabaseClient(accessToken?: string): SupabaseClient {
   const env = getEnv();
   return createClient(requireEnv(env, "SUPABASE_URL"), requireEnv(env, "SUPABASE_ANON_KEY"), {
@@ -20,6 +21,8 @@ function createSupabaseClient(accessToken?: string): SupabaseClient {
   });
 }
 
+=======
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 export function getSupabaseAdmin(): SupabaseClient {
   if (client) {
     return client;
@@ -34,6 +37,7 @@ export function getSupabaseAdmin(): SupabaseClient {
   });
 
   return client;
+<<<<<<< HEAD
 }
 
 export function getSupabaseClient(): SupabaseClient {
@@ -42,4 +46,6 @@ export function getSupabaseClient(): SupabaseClient {
 
 export function getSupabaseSessionClient(accessToken: string): SupabaseClient {
   return createSupabaseClient(accessToken);
+=======
+>>>>>>> 3d549590b8362e89faeb9c442c35a3d2fc36de6a
 }
