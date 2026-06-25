@@ -7,6 +7,8 @@ import { getEnv } from "./env";
 import { created, ok } from "./response";
 import { getSupabaseAdmin } from "./supabase";
 import { automationService } from "../services/automation";
+import { deadlineRouter } from "../modules/deadlines";
+import { authMiddleware } from "./auth-middleware";
 
 export function createApp() {
   const app = express();
@@ -15,6 +17,7 @@ export function createApp() {
   app.use(helmet());
   app.use(cors({ origin: true, credentials: true }));
   app.use(express.json({ limit: "1mb" }));
+  app.use(authMiddleware);
 
   app.get("/health", (_request, response) => {
     ok(response, { ok: true, service: "campusflow-api", time: new Date().toISOString() });
@@ -143,6 +146,8 @@ export function createApp() {
       next(error);
     }
   });
+
+  app.use("/api/deadlines", deadlineRouter);
 
   app.get("/api/status", (_request, response) => {
     return ok(response, { ok: true, env: env.NODE_ENV });

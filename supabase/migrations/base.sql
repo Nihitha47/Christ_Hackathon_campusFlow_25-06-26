@@ -17,6 +17,7 @@ create table if not exists public.tasks (
   profile_id uuid not null references public.profiles(id) on delete cascade,
   title text not null,
   description text not null default '',
+  subject text not null default '',
   due_at timestamptz not null,
   reminder_at timestamptz not null,
   add_to_calendar boolean not null default false,
