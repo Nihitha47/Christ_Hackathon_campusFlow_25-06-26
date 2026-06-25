@@ -14,4 +14,5 @@ export type AutomationDeliveryResult = {
   responseStatus?: number;
   responseBody?: string;
   errorMessage?: string;
+  attempts?: number;
 };

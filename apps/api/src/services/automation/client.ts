@@ -37,7 +37,7 @@ export async function postAutomationWebhook(payload: Record<string, unknown>): P
       globalThis.clearTimeout(timeout);
 
       if (response.ok) {
-        return { status: "sent", responseStatus: response.status, responseBody };
+        return { status: "sent", responseStatus: response.status, responseBody, attempts: attempt };
       }
 
       lastError = `Webhook responded with ${response.status}`;
@@ -54,5 +54,5 @@ export async function postAutomationWebhook(payload: Record<string, unknown>): P
   }
 
   log("error", "automation webhook delivery exhausted retries", { errorMessage: lastError });
-  return { status: "failed", errorMessage: lastError };
+  return { status: "failed", errorMessage: lastError, attempts: maxRetries };
 }

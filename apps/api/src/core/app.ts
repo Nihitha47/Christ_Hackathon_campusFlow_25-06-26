@@ -7,6 +7,7 @@ import { getEnv } from "./env";
 import { created, ok } from "./response";
 import { getSupabaseAdmin } from "./supabase";
 import { automationService } from "../services/automation";
+import { groupsRouter } from "../modules/groups";
 
 export function createApp() {
   const app = express();
@@ -147,6 +148,8 @@ export function createApp() {
   app.get("/api/status", (_request, response) => {
     return ok(response, { ok: true, env: env.NODE_ENV });
   });
+
+  app.use("/api", groupsRouter);
 
   app.use(notFoundHandler);
   app.use(errorHandler);
