@@ -25,3 +25,12 @@ export const buildPlacementMilestoneCreatedPayload = createPayloadBuilder<Placem
 export const buildMockInterviewScheduledPayload = createPayloadBuilder<PlacementPayload>("MOCK_INTERVIEW_SCHEDULED", "placement");
 export const buildStudyGroupCreatedPayload = createPayloadBuilder<StudyGroupPayload>("STUDY_GROUP_CREATED", "groups");
 export const buildStudySessionScheduledPayload = createPayloadBuilder<StudySessionPayload>("STUDY_SESSION_SCHEDULED", "groups");
+
+export const automationPayloadBuilders = {
+  DEADLINE_CREATED: buildDeadlineCreatedPayload,
+  DEADLINE_REMINDER_SCHEDULED: buildDeadlineReminderScheduledPayload,
+  PLACEMENT_MILESTONE_CREATED: buildPlacementMilestoneCreatedPayload,
+  MOCK_INTERVIEW_SCHEDULED: buildMockInterviewScheduledPayload,
+  STUDY_GROUP_CREATED: buildStudyGroupCreatedPayload,
+  STUDY_SESSION_SCHEDULED: buildStudySessionScheduledPayload
+} as const;

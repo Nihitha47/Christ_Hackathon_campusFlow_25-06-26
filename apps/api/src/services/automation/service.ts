@@ -16,7 +16,7 @@ export class AutomationService {
     });
 
     const delivery = await postAutomationWebhook(envelope);
-    const logRecord = await insertAutomationLog(event, delivery);
+    const logRecord = await insertAutomationLog({ ...event, payload: envelope.payload }, delivery);
 
     log("info", "automation event processed", {
       eventType: event.eventType,
