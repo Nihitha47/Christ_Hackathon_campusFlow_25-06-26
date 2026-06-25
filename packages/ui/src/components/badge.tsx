@@ -1,0 +1,6 @@
+import * as React from "react";
+import { cn } from "../utils";
+
+export function Badge({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+  return <span className={cn("inline-flex rounded-full border border-slate-700 bg-slate-800 px-2.5 py-1 text-xs font-medium text-slate-200", className)} {...props} />;
+}

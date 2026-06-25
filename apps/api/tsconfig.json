@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "@campusflow/shared": ["../../packages/shared/src/index.ts"],
+      "@campusflow/shared/*": ["../../packages/shared/src/*"]
+    }
+  },
+  "include": ["src"]
+}

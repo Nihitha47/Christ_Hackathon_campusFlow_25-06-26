@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: campusflow-api
+    env: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm install --frozen-lockfile=false && pnpm --filter @campusflow/api build
+    startCommand: pnpm --filter @campusflow/api start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: API_PORT
+        value: 4000
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: N8N_WEBHOOK_URL
+        sync: false
+      - key: N8N_WEBHOOK_SECRET
+        sync: false
